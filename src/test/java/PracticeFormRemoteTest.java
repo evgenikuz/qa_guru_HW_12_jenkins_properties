@@ -21,13 +21,20 @@ public class PracticeFormRemoteTest {
     @BeforeAll()
     static void onSetUpConfigurations() {
         Configuration.browserSize = System.getProperty("resolution", "1980x1080");
-        Configuration.browser = System.getProperty("browser", "chrome");
-        if (System.getProperty("browser").equals("chrome")) {
-            ChromeOptions options = new ChromeOptions();
-            options.setCapability("browserVersion", System.getProperty("version", "128.0"));
-        } else if (System.getProperty("browser").equals("firefox")) {
-            FirefoxOptions options = new FirefoxOptions();
-            options.setCapability("browserVersion", System.getProperty("version", "124.0"));
+        String browserFromJenkins = System.getProperty("browser", "chrome");
+        Configuration.browser = browserFromJenkins;
+
+        switch (browserFromJenkins) {
+            case "chrome" -> {
+                ChromeOptions options = new ChromeOptions();
+                options.setCapability("browserVersion", System.getProperty("version", "128.0"));
+                Configuration.browserCapabilities = options;
+            }
+            case "firefox" -> {
+                FirefoxOptions options = new FirefoxOptions();
+                options.setCapability("browserVersion", System.getProperty("version", "124.0"));
+                Configuration.browserCapabilities = options;
+            }
         }
 //        Configuration.browserVersion = System.getProperty("version", "128.0");
         Configuration.baseUrl = "https://demoqa.com";
