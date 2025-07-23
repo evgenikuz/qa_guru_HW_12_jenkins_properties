@@ -20,7 +20,7 @@ public class PracticeFormRemoteTest {
     static void onSetUpConfigurations() {
         Configuration.browserSize = System.getProperty("resolution", "1980x1080");
         Configuration.browser = System.getProperty("browser", "chrome");
-//        Configuration.browserVersion = System.getProperty("browser.version", "138.0");
+        Configuration.browserVersion = System.getProperty("version", "128.0");
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.remote = "https://user1:1234@" + System.getProperty("selenoid_url") + "/wd/hub";
