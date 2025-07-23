@@ -19,7 +19,7 @@ public class PracticeFormRemoteTest {
     @BeforeAll()
     static void onSetUpConfigurations() {
         Configuration.browserSize = "1980x1080";
-//        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browser = System.getProperty("browser", "chrome");
 //        Configuration.browserVersion = System.getProperty("version", "138");
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
@@ -47,7 +47,6 @@ public class PracticeFormRemoteTest {
     @Test
     @Tag("properties")
     void fillPracticeFormTest() {
-        System.out.println(System.getProperty("browser"));
         step("open form", () -> {
             open("/automation-practice-form");
         });
