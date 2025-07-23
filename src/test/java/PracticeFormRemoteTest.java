@@ -46,6 +46,7 @@ public class PracticeFormRemoteTest {
     @Test
     @Tag("properties")
     void fillPracticeFormTest() {
+        System.out.println("browser.version");
         step("open form", () -> {
             open("/automation-practice-form");
         });
