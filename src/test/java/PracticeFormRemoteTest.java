@@ -2,10 +2,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -21,21 +18,8 @@ public class PracticeFormRemoteTest {
     @BeforeAll()
     static void onSetUpConfigurations() {
         Configuration.browserSize = System.getProperty("resolution", "1980x1080");
-        String browserFromJenkins = System.getProperty("browser", "chrome");
-        Configuration.browser = browserFromJenkins;
-
-        switch (browserFromJenkins) {
-            case "chrome" -> {
-                ChromeOptions options = new ChromeOptions();
-                options.setCapability("browserVersion", System.getProperty("version", "128.0"));
-                Configuration.browserCapabilities = options;
-            }
-            case "firefox" -> {
-                FirefoxOptions options = new FirefoxOptions();
-                options.setCapability("browserVersion", System.getProperty("version", "124.0"));
-                Configuration.browserCapabilities = options;
-            }
-        }
+        Configuration.browser = System.getProperty("browser", "chrome");
+        Configuration.browserVersion = System.getProperty("version", "128.0");
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.remote = "https://user1:1234@" + System.getProperty("selenoid_url") + "/wd/hub";
@@ -46,7 +30,10 @@ public class PracticeFormRemoteTest {
                 "enableVideo", true
         ));
         Configuration.browserCapabilities = capabilities;
+    }
 
+    @BeforeEach
+    void beforeEachTest() {
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide());
     }
 
