@@ -18,7 +18,7 @@ public class PracticeFormRemoteTest {
     @BeforeAll()
     static void onSetUpConfigurations() {
         Configuration.browserSize = System.getProperty("resolution", "1980x1080");
-        Configuration.browser = System.getProperty("selenide.browser", "chrome");
+        Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.browserVersion = System.getProperty("version", "128.0");
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
