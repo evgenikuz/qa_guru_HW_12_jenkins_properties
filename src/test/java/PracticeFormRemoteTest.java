@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import java.io.File;
 import java.util.Map;
 
 import static com.codeborne.selenide.Condition.text;
@@ -82,7 +83,8 @@ public class PracticeFormRemoteTest {
             $(byText("Music")).click();
         });
         step("upload picture",() -> {
-            $("#uploadPicture").uploadFromClasspath("Ob1aUY2U.jpeg");
+            File file = new File("src/test/resources/Ob1aUY2U.jpeg");
+            $("#uploadPicture").uploadFile(file);
         });
         step("fill address",() -> {
             $("#currentAddress").setValue("123409, Russia, Moscow");
