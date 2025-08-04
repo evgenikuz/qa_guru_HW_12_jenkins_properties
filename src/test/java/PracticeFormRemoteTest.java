@@ -8,6 +8,7 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.io.File;
+import java.net.URL;
 import java.util.Map;
 
 import static com.codeborne.selenide.Condition.text;
@@ -83,7 +84,9 @@ public class PracticeFormRemoteTest {
             $(byText("Music")).click();
         });
         step("upload picture",() -> {
-            File file = new File("src/test/resources/Ob1aUY2U.jpeg");
+            URL resource = getClass().getClassLoader().getResource("Ob1aUY2U.jpeg");
+            File file = new File(resource.getFile());
+//            File file = new File("src/test/resources/Ob1aUY2U.jpeg");
             $("#uploadPicture").uploadFile(file);
         });
         step("fill address",() -> {
